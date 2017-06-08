@@ -8,7 +8,9 @@ socket.on('message', message => {
 	console.log('New message:');
 	console.log(message.text);
 
-	jQuery('.messages').append('<p>' + message.text + '</p>');
+	const time = moment.utc(message.timestamp).local().format('h:mm a');
+
+	jQuery('.messages').append('<p><strong>' + time + ': </strong>' + message.text + '</p>');
 })
 
 // 	Handles submitting of new message
@@ -20,8 +22,10 @@ $form.on('submit', event => {
 	event.preventDefault();
 
 	var $message = $form.find('input[name=message]');
+	var $timestamp = moment().valueOf();
 
 	socket.emit('message', {
+		timestamp: $timestamp,
 		text: $message.val()
 	});
 
