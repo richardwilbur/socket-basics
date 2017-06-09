@@ -16,11 +16,14 @@ io.on('connection', socket => {
 		// Send message to all but sender:
 		// socket.broadcast.emit('message', message);
 		
+		message.timestamp = moment().valueOf(),
+		
 		// Send message to all:
 		io.emit('message', message);
 	});
 
 	socket.emit('message', {
+		name: 'System',
 		timestamp: moment().valueOf(),
 		text: 'Welcome to the chat application!'
 	});
