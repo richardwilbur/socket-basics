@@ -4,7 +4,7 @@ var room = getQueryVariable('room');
 
 console.log(`${name} wants to join ${room}`);
 
-$('#room-title').text(room);
+$('.room-title').text(room);
 
 socket.on('connect', function () {
 	console.log('Connected to socket.io server!');
